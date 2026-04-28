@@ -5,25 +5,25 @@ A conversational AI agent that answers founder-level business questions by query
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────┐
-│                    React Frontend (Chat UI)                  │
+┌────────────────────────────────────────────────────────────┐
+│                    React Frontend (Chat UI)                │
 │  ┌─────────────┐   ┌──────────────┐   ┌──────────────────┐ │
 │  │ Chat Thread │   │ Sample Query │   │ Board Status     │ │
 │  │ (messages)  │   │ Sidebar      │   │ Sidebar          │ │
 │  └─────────────┘   └──────────────┘   └──────────────────┘ │
-└──────────────────────────┬──────────────────────────────────┘
+└──────────────────────────┬─────────────────────────────────┘
                            │ fetch()
                            ▼
 ┌─────────────────────────────────────────────────────────────┐
-│              Anthropic Claude API (claude-sonnet-4)          │
+│              Anthropic Claude API (claude-sonnet-4)         │
 │  - System prompt with board schema & data quality notes     │
 │  - 5 tool schemas for querying both boards                  │
-│  - Agentic loop: tool_use → execute → feed back → answer   │
+│  - Agentic loop: tool_use → execute → feed back → answer    │
 └──────────────────────────┬──────────────────────────────────┘
                            │ tool_use blocks
                            ▼
 ┌─────────────────────────────────────────────────────────────┐
-│            In-Browser Tool Execution Layer                   │
+│            In-Browser Tool Execution Layer                  │
 │  query_deals_board()      → filter + return deal rows       │
 │  query_work_orders_board() → filter + return WO rows        │
 │  aggregate_deals_board()  → group by + sum/count deals      │
